@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Lista de casas Amsterdam</title>
+</head>
+<body>
+	<h1>Lista de casas</h1>
+	
+	<div class="pointlist" th:unless="${#lists.isEmpty(points)}">
+	
+		<table>
+		  <thead>
+		    <tr>
+		      <th text="Lat">Latitude</th>
+		      <th text="Lng">Longitude</th>
+		      <th text="Url">Url</th>
+		      <th text="Subtitle">Subtitle</th>
+		      <th text="Distance">Distance</th>
+		      <th text="Duration">Duration</th>
+		      <th text="Duration">Link to Maps</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr th:each="point: ${points}">
+		      <td th:text="${point.latlng[0]}"></td>
+		      <td th:text="${point.latlng[1]}"></td>
+		      <td><a th:href="${point.url}" th:text="${point.title}" ></a></td>
+		      <td th:text="${point.subtitle}"></td>
+		      <td th:text="${point.route.rows[0].elements[0].distance.text}"></td>
+		      <td th:text="${point.route.rows[0].elements[0].duration.text}"></td>
+		      <td><a th:href="${point.urlToMaps}" th:text="${point.title}" ></a></td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+
+</body>
+</html>
